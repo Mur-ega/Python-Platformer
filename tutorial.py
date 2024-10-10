@@ -8,7 +8,7 @@ pygame.init()
 
 pygame.display.set_caption("Platformer")
 
-WIDTH, HEIGHT = 800,600
+WIDTH, HEIGHT = 1280,720
 FPS = 60 
 PLAYER_VEL = 5
 
@@ -284,16 +284,111 @@ def main(window):
     block_size = 96
     
     player = Player(100, 100, 50, 50)
-    fire = Fire(100, HEIGHT - block_size - 64, 16, 32)
+    fire = Fire(200, HEIGHT - block_size - 64, 16, 32)
     fire.on()
 
     floor = [Block(i * block_size, HEIGHT - block_size, block_size) 
-             for i in range(-WIDTH // block_size, (WIDTH * 2 )// block_size) ]
+             for i in range(-WIDTH // block_size, (WIDTH * 40 )// block_size) ]
+    
+     # Add additional blocks or obstacles
+    additional_blocks = [
+    Block(600, HEIGHT - block_size * 2, block_size), 
+    Block(600, HEIGHT - block_size * 3, block_size), 
+    Block(600, HEIGHT - block_size * 4, block_size),  
+    Block(600, HEIGHT - block_size * 5, block_size),
+    Block(600, HEIGHT - block_size * 6, block_size), 
+    
+    Block(900, HEIGHT - block_size * 6, block_size), 
+
+    Block(1200, HEIGHT - block_size * 2, block_size), 
+    Block(1200, HEIGHT - block_size * 3, block_size), 
+    Block(1200, HEIGHT - block_size * 4, block_size),  
+    Block(1200, HEIGHT - block_size * 5, block_size),
+    Block(1200, HEIGHT - block_size * 6, block_size),
+
+    Block(1600, HEIGHT - block_size * 3, block_size),  
+
+    Block(-850, HEIGHT - block_size * 2, block_size), 
+    Block(-850, HEIGHT - block_size * 3, block_size), 
+    Block(-850, HEIGHT - block_size * 4, block_size),  
+    Block(-850, HEIGHT - block_size * 5, block_size),
+    Block(-850, HEIGHT - block_size * 6, block_size),
+    Block(-850, HEIGHT - block_size * 7, block_size),
+
+    Block(-250, HEIGHT - block_size * 6, block_size),
+    Block(-250, HEIGHT - block_size * 5, block_size),
+
+    Block(-550, HEIGHT - block_size * 4, block_size),
+
+    Block(-650, HEIGHT - block_size * 3, block_size),
+
+    Block(-100, HEIGHT - block_size * 6, block_size),
+
+    Block(1700, HEIGHT - block_size * 2, block_size), 
+    Block(1700, HEIGHT - block_size * 3, block_size), 
+    Block(1700, HEIGHT - block_size * 4, block_size),  
+    Block(1700, HEIGHT - block_size * 5, block_size),
+    Block(1700, HEIGHT - block_size * 6, block_size),
+
+    Block(1400, HEIGHT - block_size * 5, block_size),
+    
+    Block(2700, HEIGHT - block_size * 2, block_size), 
+    Block(2700, HEIGHT - block_size * 3, block_size), 
+    Block(2700, HEIGHT - block_size * 4, block_size),  
+    Block(2700, HEIGHT - block_size * 5, block_size),
+    Block(2700, HEIGHT - block_size * 6, block_size),
+
+    Block(2200, HEIGHT - block_size * 4, block_size),
+
+    Block(2600, HEIGHT - block_size * 5, block_size),
+
+    Block(3500, HEIGHT - block_size * 2, block_size), 
+    Block(3600, HEIGHT - block_size * 2, block_size), 
+    Block(3600, HEIGHT - block_size * 3, block_size),  
+    Block(3700, HEIGHT - block_size * 3, block_size),
+    Block(3700, HEIGHT - block_size * 4, block_size),
+    Block(3800, HEIGHT - block_size * 4, block_size), 
+    Block(3800, HEIGHT - block_size * 5, block_size), 
+    Block(3900, HEIGHT - block_size * 5, block_size),  
+    Block(3900, HEIGHT - block_size * 6, block_size),
+    Block(4000, HEIGHT - block_size * 6, block_size),
+
+    Block(4500, HEIGHT - block_size * 2, block_size), 
+    Block(4600, HEIGHT - block_size * 2, block_size), 
+    Block(4600, HEIGHT - block_size * 3, block_size),  
+    Block(4700, HEIGHT - block_size * 3, block_size),
+    Block(4700, HEIGHT - block_size * 4, block_size),
+    Block(4800, HEIGHT - block_size * 4, block_size), 
+    Block(4800, HEIGHT - block_size * 5, block_size), 
+    Block(4900, HEIGHT - block_size * 5, block_size),  
+    Block(4900, HEIGHT - block_size * 6, block_size),
+    Block(5000, HEIGHT - block_size * 6, block_size),
+
+    
+    Block(6000, HEIGHT - block_size * 6, block_size), 
+    Block(6100, HEIGHT - block_size * 6, block_size), 
+    Block(6100, HEIGHT - block_size * 5, block_size),  
+    Block(6200, HEIGHT - block_size * 5, block_size),
+    Block(6200, HEIGHT - block_size * 4, block_size),
+    Block(6300, HEIGHT - block_size * 4, block_size), 
+    Block(6300, HEIGHT - block_size * 3, block_size), 
+    Block(6400, HEIGHT - block_size * 3, block_size),  
+    Block(6400, HEIGHT - block_size * 2, block_size),
+    Block(6500, HEIGHT - block_size * 2, block_size),
+
+    Block(5500, HEIGHT - block_size * 6, block_size), 
+]
+    
+
+
     objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
-                Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire]
+                Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire,
+                *additional_blocks]  
+
 
     offset_x = 0
-    scroll_area_width = 200
+    scroll_area_width = 300
+    
 
     run = True
     while run:
@@ -316,6 +411,7 @@ def main(window):
         if (player.rect.right - offset_x >= WIDTH - scroll_area_width and player.x_vel > 0) or (
                (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel  
+             
 
     pygame.quit()
     quit()        
